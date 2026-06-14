@@ -1,696 +1,1017 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
-  <title>OCÉANE — Chaussures de Femme à Libreville</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>OCÉANE — Chaussures Femme · Libreville</title>
+  <!-- Google Fonts + Font Awesome (icônes pro) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     :root {
-      --cream: #F8F4EE;
-      --cream-dark: #EDE7DC;
-      --parchment: #D9CFC0;
-      --noir: #1A1714;
-      --noir-mid: #3A3530;
-      --charcoal: #6B6560;
-      --gold: #B8935A;
-      --gold-light: #D4AF7A;
-      --white: #FDFCFB;
-      --font-display: 'Cormorant Garamond', serif;
-      --font-body: 'Jost', sans-serif;
-      --nav-h: 72px;
-      --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --bg: #FAF8F3;
+      --white: #FFFFFF;
+      --text: #111111;
+      --gold: #C8A35D;
+      --gold-light: #DABF8E;
+      --border: #EAE4D8;
+      --gray: #8F8B82;
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.03);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.05);
+      --radius: 14px;
+      --radius-sm: 10px;
+      --nav-height: 68px;
     }
-
-    html { scroll-behavior: smooth; }
 
     body {
-      font-family: var(--font-body);
-      background: var(--cream);
-      color: var(--noir);
-      overflow-x: hidden;
-      cursor: auto;
+      background: var(--bg);
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      line-height: 1.4;
+      scroll-behavior: smooth;
     }
 
-    /* Curseur personnalisé désactivé sur mobile via media query, mais on garde le style desktop */
-    #cursor, #cursor-ring { display: none; }
-    @media (hover: hover) and (pointer: fine) {
-      body { cursor: none; }
-      #cursor, #cursor-ring { display: block; }
+    img {
+      max-width: 100%;
+      display: block;
     }
 
-    #cursor {
-      position: fixed; top: 0; left: 0; width: 12px; height: 12px;
-      background: var(--noir); border-radius: 50%; pointer-events: none;
-      z-index: 9999; transform: translate(-50%,-50%);
-      transition: width 0.3s, height 0.3s, background 0.3s;
+    button {
+      font-family: inherit;
+      border: none;
+      background: none;
+      cursor: pointer;
     }
-    #cursor-ring {
-      position: fixed; top: 0; left: 0; width: 36px; height: 36px;
-      border: 1px solid var(--noir); border-radius: 50%; pointer-events: none;
-      z-index: 9998; transform: translate(-50%,-50%);
-      transition: width 0.3s, height 0.3s, opacity 0.3s;
-      opacity: 0.5;
-    }
-    body.cursor-hover #cursor { width: 8px; height: 8px; background: var(--gold); }
-    body.cursor-hover #cursor-ring { width: 48px; height: 48px; opacity: 0.3; border-color: var(--gold); }
 
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h);
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 1.5rem; z-index: 100;
-      background: rgba(248,244,238,0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.3s;
+    /* container fluid */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 20px;
     }
-    @media (min-width: 768px) {
-      nav { padding: 0 2.5rem; }
-    }
-    nav.scrolled { border-bottom-color: var(--parchment); }
 
-    .nav-logo {
-      font-family: var(--font-display);
-      font-size: 1.5rem; font-weight: 300;
-      letter-spacing: 0.3em; color: var(--noir);
+    /* Typographie luxe */
+    .title-font {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+    }
+
+    /* header fixe */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250, 248, 243, 0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      height: var(--nav-height);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+    }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--text);
       text-decoration: none;
     }
-    .nav-logo span { color: var(--gold); }
 
-    .nav-links { display: none; gap: 1.8rem; list-style: none; }
-    @media (min-width: 1024px) {
-      .nav-links { display: flex; }
+    .logo span {
+      color: var(--gold);
+      font-weight: 600;
     }
-    .nav-links a {
-      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em;
-      text-transform: uppercase; color: var(--noir-mid); text-decoration: none;
-      position: relative; padding-bottom: 2px;
-    }
-    .nav-links a::after {
-      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
-      height: 1px; background: var(--gold);
-      transform: scaleX(0); transform-origin: left;
-      transition: transform 0.3s;
-    }
-    .nav-links a:hover::after { transform: scaleX(1); }
 
-    .nav-actions { display: flex; gap: 0.8rem; align-items: center; }
-    .nav-actions button {
-      background: none; border: none; cursor: pointer;
-      color: var(--noir-mid); padding: 6px;
-      position: relative; transition: color 0.2s;
-      display: flex; align-items: center; justify-content: center;
+    .header-actions {
+      display: flex;
+      gap: 6px;
+      align-items: center;
     }
-    .nav-actions button:hover { color: var(--gold); }
-    .nav-actions svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.5; }
 
-    #cart-badge {
-      position: absolute; top: -2px; right: -6px;
-      background: var(--gold); color: white;
-      border-radius: 50%; width: 18px; height: 18px;
-      font-size: 0.65rem; font-family: var(--font-body);
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 500; opacity: 0; transition: opacity 0.3s;
+    .icon-btn {
+      font-size: 1.3rem;
+      color: var(--text);
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: background 0.2s;
     }
-    #cart-badge.visible { opacity: 1; }
 
-    .mobile-menu-btn { display: block; }
-    @media (min-width: 1024px) { .mobile-menu-btn { display: none; } }
+    .icon-btn:active {
+      background: var(--border);
+    }
 
+    #cart-count {
+      background: var(--gold);
+      color: white;
+      border-radius: 30px;
+      font-size: 11px;
+      font-weight: 500;
+      margin-left: -12px;
+      margin-top: -18px;
+      padding: 2px 6px;
+      display: inline-block;
+      position: relative;
+      top: -10px;
+      right: 10px;
+    }
+
+    /* mobile menu overlay */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      z-index: 200;
+      transform: translateX(-100%);
+      transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      overflow-y: auto;
+      padding: 28px 24px;
+    }
+
+    .mobile-menu.open {
+      transform: translateX(0);
+    }
+
+    .menu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+    }
+
+    .menu-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .menu-list li a {
+      font-size: 1.1rem;
+      font-weight: 450;
+      padding: 12px 0;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.2px;
+    }
+
+    /* hero */
     .hero {
-      min-height: 100vh; display: grid;
-      grid-template-columns: 1fr;
-      padding-top: var(--nav-h);
-    }
-    @media (min-width: 768px) {
-      .hero { grid-template-columns: 1fr 1fr; }
+      display: flex;
+      flex-direction: column;
     }
 
-    .hero-text {
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 3rem 1.5rem;
+    .hero-image {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      background: #E8E0D2;
     }
-    @media (min-width: 768px) {
-      .hero-text { padding: 5rem 3rem 5rem 4rem; }
+
+    .hero-content {
+      padding: 28px 20px 32px;
     }
-    .hero-eyebrow {
-      font-size: 0.68rem; letter-spacing: 0.3em; text-transform: uppercase;
-      color: var(--gold); font-weight: 500; margin-bottom: 1.5rem;
-      opacity: 0; animation: fadeUp 0.8s 0.3s forwards;
+
+    .hero-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 12px;
     }
+
     .hero-title {
-      font-family: var(--font-display); font-size: clamp(2.2rem, 8vw, 5rem);
-      font-weight: 300; line-height: 1.05;
-      color: var(--noir); margin-bottom: 1.8rem;
-      opacity: 0; animation: fadeUp 0.8s 0.5s forwards;
+      font-size: 2rem;
+      line-height: 1.2;
+      margin-bottom: 14px;
     }
-    .hero-title em { font-style: italic; color: var(--gold); }
-    .hero-desc {
-      font-size: 0.9rem; line-height: 1.8; color: var(--charcoal);
-      max-width: 400px; margin-bottom: 2.5rem;
-      opacity: 0; animation: fadeUp 0.8s 0.7s forwards;
+
+    .hero-sub {
+      font-size: 0.95rem;
+      color: #3c3a36;
+      line-height: 1.5;
+      margin-bottom: 24px;
     }
-    .hero-ctas {
-      display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;
-      opacity: 0; animation: fadeUp 0.8s 0.9s forwards;
+
+    .btn-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
     .btn-primary {
-      background: var(--noir); color: var(--cream);
-      padding: 0.9rem 2rem; font-family: var(--font-body);
-      font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
-      border: 1px solid var(--noir); cursor: pointer; text-decoration: none;
-      transition: background 0.3s, color 0.3s; font-weight: 500;
-      display: inline-block; text-align: center;
+      background: var(--gold);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 40px;
+      font-weight: 500;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
-    .btn-primary:hover { background: var(--gold); border-color: var(--gold); }
 
-    .btn-ghost {
-      background: none; color: var(--noir);
-      padding: 0.9rem 2rem; font-family: var(--font-body);
-      font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
-      border: 1px solid var(--parchment); cursor: pointer; text-decoration: none;
-      transition: border-color 0.3s; font-weight: 500;
-      display: inline-block; text-align: center;
+    .btn-primary:active {
+      background: #a17e48;
+      transform: scale(0.97);
     }
-    .btn-ghost:hover { border-color: var(--noir); }
 
-    .hero-image {
-      position: relative; overflow: hidden;
-      background: var(--cream-dark); aspect-ratio: 3/4;
+    .btn-outline {
+      border: 1px solid var(--border);
+      background: white;
+      padding: 12px 24px;
+      border-radius: 40px;
+      font-weight: 500;
+      font-size: 0.85rem;
+      transition: 0.2s;
     }
-    @media (min-width: 768px) { .hero-image { aspect-ratio: auto; } }
-    .hero-image img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform 8s ease;
-    }
-    .hero-image:hover img { transform: scale(1.04); }
 
-    .hero-image-overlay {
-      position: absolute; bottom: 1.5rem; left: 1.5rem;
-      background: rgba(248,244,238,0.92);
-      padding: 1rem 1.4rem;
-      border-left: 2px solid var(--gold);
-      opacity: 0; animation: fadeUp 0.8s 1.1s forwards;
+    .btn-outline:active {
+      border-color: var(--gold);
+      background: #fef8ef;
     }
-    .hero-image-overlay p { font-size: 0.7rem; letter-spacing: 0.15em; color: var(--charcoal); text-transform: uppercase; }
-    .hero-image-overlay strong { font-family: var(--font-display); font-size: 1.4rem; font-weight: 300; color: var(--noir); display: block; margin-top: 0.2rem; }
 
-    .ticker {
-      background: var(--noir); padding: 0.7rem 0;
-      overflow: hidden; white-space: nowrap;
+    /* trust bar */
+    .trust-bar {
+      background: white;
+      display: flex;
+      overflow-x: auto;
+      gap: 24px;
+      padding: 14px 20px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+      scrollbar-width: none;
     }
-    .ticker-inner { display: inline-block; animation: ticker 30s linear infinite; }
-    .ticker-item {
-      display: inline-block; margin: 0 2rem;
-      font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--parchment);
-    }
-    .ticker-item .dot { color: var(--gold); margin: 0 0.5rem; }
 
-    .section-header { text-align: center; margin-bottom: 2.5rem; }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      font-weight: 450;
+      color: #2e2c28;
+    }
+
+    .trust-item i {
+      color: var(--gold);
+      font-size: 1rem;
+    }
+
+    /* filter section */
+    .size-filter-section {
+      padding: 24px 20px 16px;
+      background: white;
+      margin: 16px 0 0;
+    }
+
+    .filter-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #6b675f;
+      margin-bottom: 12px;
+    }
+
+    .size-chips {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .size-chip {
+      width: 48px;
+      height: 48px;
+      border-radius: 60px;
+      border: 1px solid var(--border);
+      background: white;
+      font-weight: 500;
+      transition: all 0.2s;
+      font-size: 0.85rem;
+    }
+
+    .size-chip.active {
+      background: var(--text);
+      border-color: var(--text);
+      color: white;
+    }
+
+    .filter-stats {
+      font-size: 0.7rem;
+      color: var(--gray);
+      margin-top: 12px;
+    }
+
+    /* section headers */
+    .section {
+      margin: 32px 0 16px;
+      padding: 0 20px;
+    }
+
     .section-label {
-      font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
-      color: var(--gold); font-weight: 500; margin-bottom: 0.8rem; display: block;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      margin-bottom: 6px;
     }
+
     .section-title {
-      font-family: var(--font-display); font-size: clamp(2rem, 6vw, 3.2rem);
-      font-weight: 300; color: var(--noir); line-height: 1.1;
+      font-size: 1.6rem;
+      font-family: 'Cormorant Garamond', serif;
+      margin-bottom: 4px;
     }
-    .section-title em { font-style: italic; }
 
-    .categories { padding: 4rem 1.5rem; }
-    @media (min-width: 768px) { .categories { padding: 6rem 4rem; } }
-    .categories-grid {
-      display: grid; grid-template-columns: 1fr; gap: 1.5rem;
+    .section-desc {
+      font-size: 0.8rem;
+      color: #5b584f;
     }
-    @media (min-width: 640px) { .categories-grid { grid-template-columns: repeat(3, 1fr); } }
 
-    .cat-card {
-      position: relative; overflow: hidden;
-      aspect-ratio: 3/4; cursor: pointer;
+    /* produit grille */
+    .product-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      padding: 0 20px;
     }
-    .cat-card img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform 0.6s var(--transition);
-      filter: brightness(0.9);
-    }
-    .cat-card:hover img { transform: scale(1.06); filter: brightness(0.75); }
-    .cat-overlay {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      padding: 2rem 1.5rem;
-      background: linear-gradient(to top, rgba(26,23,20,0.75) 0%, transparent 100%);
-    }
-    .cat-label {
-      font-size: 0.6rem; letter-spacing: 0.25em; color: var(--gold);
-      text-transform: uppercase; margin-bottom: 0.4rem; display: block;
-    }
-    .cat-name { font-family: var(--font-display); font-size: 2rem; font-weight: 300; color: white; line-height: 1; }
-    .cat-count { font-size: 0.72rem; color: rgba(255,255,255,0.6); margin-top: 0.4rem; }
-    .cat-arrow {
-      position: absolute; top: 1.5rem; right: 1.5rem;
-      width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.4);
-      border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      color: white; font-size: 0.9rem;
-      transform: translateX(60px); opacity: 0;
-      transition: transform 0.4s, opacity 0.4s;
-    }
-    .cat-card:hover .cat-arrow { transform: translateX(0); opacity: 1; }
 
-    .products { padding: 4rem 1.5rem; background: var(--white); }
-    @media (min-width: 768px) { .products { padding: 6rem 4rem; } }
+    .product-card {
+      background: white;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s;
+    }
 
-    .products-filter {
-      display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 2.5rem;
-      border-bottom: 1px solid var(--cream-dark); padding-bottom: 0.5rem;
+    .product-img {
+      aspect-ratio: 3 / 4;
+      width: 100%;
+      object-fit: cover;
+      background: #f3efe7;
     }
-    .filter-btn {
-      background: none; border: none; padding: 0.6rem 1rem;
-      font-family: var(--font-body); font-size: 0.7rem; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--charcoal); cursor: pointer;
-      position: relative; transition: color 0.3s; font-weight: 500;
-    }
-    .filter-btn.active { color: var(--noir); font-weight: 600; }
-    .filter-btn:hover { color: var(--noir); }
 
-    .products-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1.5rem;
+    .product-info {
+      padding: 12px 12px 14px;
     }
-    @media (min-width: 640px) { .products-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (min-width: 1024px) { .products-grid { grid-template-columns: repeat(4, 1fr); } }
 
-    .product-card { cursor: pointer; }
-    .product-image-wrap {
-      position: relative; overflow: hidden;
-      background: var(--cream); aspect-ratio: 3/4;
-      margin-bottom: 1rem;
-    }
-    .product-image-wrap img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform 0.6s var(--transition), opacity 0.4s;
-    }
-    .product-image-wrap .img-alt {
-      position: absolute; top: 0; left: 0;
-      width: 100%; height: 100%; object-fit: cover;
-      opacity: 0; transition: opacity 0.4s;
-    }
-    .product-card:hover .product-image-wrap img:not(.img-alt) { opacity: 0; }
-    .product-card:hover .img-alt { opacity: 1; }
-    .product-card:hover .product-image-wrap img { transform: scale(1.03); }
-
-    .product-badge {
-      position: absolute; top: 0.8rem; left: 0.8rem;
-      background: var(--noir); color: var(--cream);
-      font-size: 0.55rem; letter-spacing: 0.15em; padding: 0.25rem 0.6rem;
-      text-transform: uppercase; font-weight: 500;
-    }
-    .product-badge.new { background: var(--gold); }
-    .product-badge.sale { background: #8B2C2C; }
-
-    .product-actions {
-      position: absolute; bottom: 0.8rem; left: 0.8rem; right: 0.8rem;
-      display: flex; gap: 0.4rem;
-      transform: translateY(20px); opacity: 0;
-      transition: transform 0.4s, opacity 0.4s;
-    }
-    .product-card:hover .product-actions { transform: translateY(0); opacity: 1; }
-
-    .btn-add-cart {
-      flex: 1; background: var(--noir); color: var(--cream);
-      border: none; padding: 0.65rem; font-family: var(--font-body);
-      font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;
-      cursor: pointer; transition: background 0.3s; font-weight: 500;
-    }
-    .btn-add-cart:hover { background: var(--gold); }
-
-    .btn-wishlist {
-      width: 38px; background: white; border: 1px solid var(--cream-dark);
-      color: var(--charcoal); cursor: pointer; font-size: 0.9rem;
-      transition: color 0.2s, border-color 0.2s; display: flex;
-      align-items: center; justify-content: center;
-    }
-    .btn-wishlist:hover, .btn-wishlist.active { color: #C0392B; border-color: #C0392B; }
-
-    .product-brand {
-      font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--charcoal); margin-bottom: 0.2rem; font-weight: 500;
-    }
     .product-name {
-      font-family: var(--font-display); font-size: 1rem; font-weight: 400;
-      color: var(--noir); margin-bottom: 0.4rem; line-height: 1.2;
+      font-weight: 500;
+      font-size: 0.85rem;
+      margin-bottom: 4px;
     }
-    .product-price { display: flex; gap: 0.5rem; align-items: baseline; flex-wrap: wrap; }
-    .price-current { font-size: 0.85rem; font-weight: 500; color: var(--noir); }
-    .price-old { font-size: 0.75rem; color: var(--charcoal); text-decoration: line-through; }
-    .product-stars { color: var(--gold); font-size: 0.65rem; margin-top: 0.3rem; }
 
-    .banner { display: grid; grid-template-columns: 1fr; min-height: 400px; }
-    @media (min-width: 768px) { .banner { grid-template-columns: 1fr 1fr; min-height: 500px; } }
-    .banner-image { position: relative; overflow: hidden; aspect-ratio: 4/3; }
-    @media (min-width: 768px) { .banner-image { aspect-ratio: auto; } }
-    .banner-image img { width: 100%; height: 100%; object-fit: cover; }
-    .banner-content {
-      background: var(--noir); display: flex; flex-direction: column;
-      justify-content: center; padding: 3rem 1.8rem;
+    .product-price {
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.2px;
     }
-    @media (min-width: 768px) { .banner-content { padding: 5rem 4rem; } }
 
-    .features {
-      padding: 3rem 1.5rem;
-      display: grid; grid-template-columns: repeat(2, 1fr);
-      gap: 2rem; border-top: 1px solid var(--cream-dark);
+    .product-sizes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 8px 0;
+      font-size: 0.7rem;
     }
-    @media (min-width: 768px) { .features { grid-template-columns: repeat(4, 1fr); padding: 5rem 4rem; } }
+
+    .size-dot {
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 3px 8px;
+      font-size: 0.65rem;
+      background: white;
+    }
+
+    .btn-add {
+      background: var(--text);
+      color: white;
+      width: 100%;
+      padding: 8px 0;
+      border-radius: 60px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      margin-top: 8px;
+      transition: 0.2s;
+    }
+
+    .btn-add:active {
+      background: var(--gold);
+    }
+
+    .btn-duo-add {
+      background: rgba(200, 163, 93, 0.08);
+      border: 1px solid var(--gold-light);
+      color: var(--gold);
+      width: 100%;
+      border-radius: 60px;
+      padding: 6px 0;
+      font-size: 0.7rem;
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    /* duo section premium */
+    .duo-premium {
+      background: white;
+      margin: 32px 20px;
+      border-radius: 24px;
+      border: 1px solid var(--gold-light);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+    }
+
+    .duo-header {
+      background: #FFFBF5;
+      padding: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .duo-badge {
+      display: inline-block;
+      background: var(--gold);
+      color: white;
+      font-size: 0.7rem;
+      padding: 2px 12px;
+      border-radius: 40px;
+      letter-spacing: 0.02em;
+      margin-bottom: 10px;
+    }
+
+    .duo-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+    }
+
+    .duo-slots {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 20px;
+    }
+
+    .duo-slot {
+      border: 1.5px dashed var(--border);
+      border-radius: 18px;
+      padding: 16px 8px;
+      text-align: center;
+      background: var(--bg);
+      transition: all 0.2s;
+      min-height: 130px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .duo-slot.filled {
+      border-style: solid;
+      border-color: var(--gold);
+      background: #FFFCF7;
+      position: relative;
+    }
+
+    .slot-img {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 6px;
+    }
+
+    .slot-name {
+      font-size: 0.7rem;
+      font-weight: 500;
+    }
+
+    .slot-price {
+      font-size: 0.7rem;
+      color: var(--gold);
+    }
+
+    .remove-slot {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      background: rgba(0,0,0,0.05);
+      border-radius: 40px;
+      width: 22px;
+      height: 22px;
+      font-size: 0.7rem;
+    }
+
+    .duo-summary {
+      padding: 12px 20px 20px;
+      background: #FEFAF5;
+      border-top: 1px solid var(--border);
+    }
+
+    .price-compare {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .duo-total {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .eco-badge {
+      color: #2b6e47;
+      background: #e3f2e9;
+      padding: 4px 12px;
+      border-radius: 40px;
+      font-size: 0.7rem;
+    }
+
+    /* témoignages */
+    .testimonials {
+      background: white;
+      padding: 32px 20px;
+      margin: 24px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .testimonial-card {
+      font-style: italic;
+      font-size: 0.9rem;
+      color: #2e2b26;
+      border-left: 2px solid var(--gold);
+      padding-left: 16px;
+      margin-bottom: 24px;
+    }
+
+    /* footer */
+    footer {
+      background: white;
+      padding: 32px 20px 28px;
+      border-top: 1px solid var(--border);
+    }
 
     .footer-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 2rem; margin-bottom: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 28px;
     }
-    @media (min-width: 768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; } }
 
-    .cart-panel { width: 100%; max-width: 420px; }
+    .footer-col h4 {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 10px;
+      color: #2b2a27;
+    }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
+    .footer-col ul {
+      list-style: none;
     }
-    @keyframes ticker {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
+
+    .footer-col li {
+      margin-bottom: 8px;
+      font-size: 0.75rem;
+      color: var(--gray);
     }
-    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s, transform 0.7s; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .payment-icons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 16px 0;
+    }
+
+    /* cart drawer */
+    .cart-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.3);
+      z-index: 300;
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.2s;
+    }
+
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: min(400px, 85vw);
+      height: 100%;
+      background: white;
+      z-index: 301;
+      transform: translateX(100%);
+      transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1);
+      display: flex;
+      flex-direction: column;
+      box-shadow: -4px 0 20px rgba(0,0,0,0.05);
+    }
+
+    .cart-drawer.open {
+      transform: translateX(0);
+    }
+
+    .cart-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* whatsapp button only */
+    .whatsapp-checkout {
+      background: #25D366;
+      color: white;
+      width: 100%;
+      padding: 14px;
+      border-radius: 60px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      transition: 0.2s;
+      margin-top: 8px;
+    }
+
+    .whatsapp-checkout:active {
+      background: #128C7E;
+      transform: scale(0.98);
+    }
+
+    /* divers */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #111;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 60px;
+      font-size: 0.8rem;
+      z-index: 400;
+      opacity: 0;
+      transition: 0.2s;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    @media (min-width: 768px) {
+      .product-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .hero {
+        flex-direction: row;
+        align-items: center;
+      }
+      .hero-image {
+        width: 50%;
+        aspect-ratio: 1/1;
+      }
+      .hero-content {
+        width: 50%;
+        padding: 48px;
+      }
+      .duo-slots {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+      }
+      .size-chips {
+        justify-content: center;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <div id="cursor"></div>
-  <div id="cursor-ring"></div>
+<header class="site-header">
+  <a href="#" class="logo">OCÉANE<span>.</span></a>
+  <div class="header-actions">
+    <button class="icon-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+    <button class="icon-btn" id="cartIconBtn"><i class="fas fa-bag-shopping"></i><span id="cart-count" style="display:none;">0</span></button>
+  </div>
+</header>
 
-  <nav id="navbar">
-    <a href="#" class="nav-logo">OCÉAN<span>E</span></a>
-    <ul class="nav-links">
-      <li><a href="#categories">Collections</a></li>
-      <li><a href="#products">Boutique</a></li>
-      <li><a href="#">Nouveautés</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-    <div class="nav-actions">
-      <button title="Rechercher" aria-label="Recherche">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      </button>
-      <button title="Mon compte" aria-label="Compte">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      </button>
-      <button id="cart-toggle" title="Panier" style="position:relative;" aria-label="Panier">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-        <span id="cart-badge">0</span>
-      </button>
-      <button class="mobile-menu-btn" aria-label="Menu">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-      </button>
-    </div>
-  </nav>
+<!-- mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="menu-header">
+    <span class="logo" style="font-size:1.6rem;">OCÉANE<span>.</span></span>
+    <button class="icon-btn" id="closeMenuBtn"><i class="fas fa-times"></i></button>
+  </div>
+  <ul class="menu-list">
+    <li><a href="#nouveautes">Nouveautés <i class="fas fa-arrow-right" style="font-size:0.8rem;"></i></a></li>
+    <li><a href="#escarpins">Escarpins <i class="fas fa-arrow-right"></i></a></li>
+    <li><a href="#mules">Mules à Talons <i class="fas fa-arrow-right"></i></a></li>
+    <li><a href="#sandales">Sandales & Plates <i class="fas fa-arrow-right"></i></a></li>
+    <li><a href="#duo-section">Duo Malin <i class="fas fa-gem"></i></a></li>
+    <li><a href="#" id="whatsappMenuLink"><i class="fab fa-whatsapp"></i> Contact WhatsApp</a></li>
+  </ul>
+</div>
 
-  <section class="hero">
-    <div class="hero-text">
-      <p class="hero-eyebrow">Nouvelle Collection · Libreville</p>
-      <h1 class="hero-title">
-        L'élégance<br>
-        <em>gabonaise</em><br>
-        à chaque pas
-      </h1>
-      <p class="hero-desc">
-        Découvrez des chaussures qui allient confort moderne et raffinement. Votre magasin Océane au cœur de Libreville.
-      </p>
-      <div class="hero-ctas">
-        <a href="#products" class="btn-primary">Découvrir</a>
-        <a href="#categories" class="btn-ghost">Collections</a>
+<main>
+  <div class="hero">
+    <img class="hero-image" src="https://images.unsplash.com/photo-1560343776-97e7d202ff0e?w=800&q=85" alt="femme élégante chaussures" loading="eager">
+    <div class="hero-content">
+      <div class="hero-tag">LIBREVILLE · ÉDITION LIMITÉE</div>
+      <h1 class="hero-title title-font">Les chaussures de la femme gabonaise moderne.</h1>
+      <p class="hero-sub">Élégance, confort et caractère pour chaque moment de votre journée.</p>
+      <div class="btn-group">
+        <a href="#nouveautes" class="btn-primary"><i class="fas fa-eye"></i> Découvrir</a>
+        <a href="#duo-section" class="btn-outline"><i class="fas fa-gift"></i> Duo Malin</a>
       </div>
-    </div>
-    <div class="hero-image">
-      <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=900&q=80" alt="Collection Océane" />
-      <div class="hero-image-overlay">
-        <p>Collection Signature</p>
-        <strong>Libreville 2025</strong>
-      </div>
-    </div>
-  </section>
-
-  <div class="ticker">
-    <div class="ticker-inner">
-      <span class="ticker-item">Livraison offerte à Libreville <span class="dot">◆</span></span>
-      <span class="ticker-item">Paiement en FCFA <span class="dot">◆</span></span>
-      <span class="ticker-item">Qualité premium <span class="dot">◆</span></span>
-      <span class="ticker-item">Service client réactif <span class="dot">◆</span></span>
-      <span class="ticker-item">Livraison offerte à Libreville <span class="dot">◆</span></span>
-      <span class="ticker-item">Paiement en FCFA <span class="dot">◆</span></span>
-      <span class="ticker-item">Qualité premium <span class="dot">◆</span></span>
-      <span class="ticker-item">Service client réactif <span class="dot">◆</span></span>
     </div>
   </div>
 
-  <section class="categories" id="categories">
-    <div class="section-header reveal">
-      <span class="section-label">Nos Univers</span>
-      <h2 class="section-title">Explorez nos <em>Collections</em></h2>
-    </div>
-    <div class="categories-grid">
-      <div class="cat-card reveal">
-        <img src="https://images.unsplash.com/photo-1515347619252-60a4bf4fff4f?w=600&q=80" alt="Escarpins" />
-        <div class="cat-overlay"><span class="cat-label">Sophistication</span><div class="cat-name">Escarpins</div><div class="cat-count">24 modèles</div></div>
-        <div class="cat-arrow">→</div>
-      </div>
-      <div class="cat-card reveal">
-        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80" alt="Sneakers" />
-        <div class="cat-overlay"><span class="cat-label">Urbanité</span><div class="cat-name">Sneakers</div><div class="cat-count">18 modèles</div></div>
-        <div class="cat-arrow">→</div>
-      </div>
-      <div class="cat-card reveal">
-        <img src="https://images.unsplash.com/photo-1518049362265-d5b2a6467637?w=600&q=80" alt="Sandales" />
-        <div class="cat-overlay"><span class="cat-label">Liberté</span><div class="cat-name">Sandales</div><div class="cat-count">31 modèles</div></div>
-        <div class="cat-arrow">→</div>
-      </div>
-    </div>
-  </section>
+  <div class="trust-bar">
+    <div class="trust-item"><i class="fas fa-truck-fast"></i> Livraison Libreville</div>
+    <div class="trust-item"><i class="fas fa-hand-holding-usd"></i> Paiement à la livraison</div>
+    <div class="trust-item"><i class="fas fa-exchange-alt"></i> Échange facile</div>
+    <div class="trust-item"><i class="fab fa-whatsapp"></i> Assistance WhatsApp</div>
+  </div>
 
-  <section class="products" id="products">
-    <div class="section-header reveal">
-      <span class="section-label">Sélection du Moment</span>
-      <h2 class="section-title">Nos <em>Pièces Phares</em></h2>
-    </div>
-    <div class="products-filter">
-      <button class="filter-btn active" data-filter="all">Tout voir</button>
-      <button class="filter-btn" data-filter="nouveautes">Nouveautés</button>
-      <button class="filter-btn" data-filter="escarpins">Escarpins</button>
-      <button class="filter-btn" data-filter="sneakers">Sneakers</button>
-      <button class="filter-btn" data-filter="sandales">Sandales</button>
-      <button class="filter-btn" data-filter="bottes">Bottes</button>
-    </div>
-    <div class="products-grid" id="products-grid"></div>
-  </section>
+  <!-- Filtre taille global -->
+  <div class="size-filter-section">
+    <div class="filter-title">CHOISISSEZ VOTRE POINTURE</div>
+    <div class="size-chips" id="globalSizeContainer"></div>
+    <div class="filter-stats" id="sizeStats"></div>
+  </div>
 
-  <section class="banner">
-    <div class="banner-image">
-      <img src="https://images.unsplash.com/photo-1571290274554-6a2eaa771e5f?w=900&q=80" alt="Collection Cuir" />
-    </div>
-    <div class="banner-content">
-      <p class="banner-eyebrow">Édition Limitée</p>
-      <h2 class="banner-title" style="color:var(--cream);">Le cuir qui<br><em>raconte une histoire</em></h2>
-      <p class="banner-text" style="color:var(--parchment);">Des pièces sélectionnées pour leur qualité exceptionnelle. Disponibles dans notre boutique de Libreville.</p>
-      <a href="#products" class="banner-cta" style="background:var(--gold); color:white; padding:0.9rem 2rem; text-decoration:none;">Voir la Collection</a>
-    </div>
-  </section>
+  <!-- DYNAMIC SECTIONS (nouveautés, escarpins, mules, sandales) -->
+  <div id="nouveautes"></div><div id="escarpins"></div><div id="mules"></div><div id="sandales"></div>
 
-  <div class="features">
-    <div class="feature reveal" style="text-align:center;">
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.2" style="margin-bottom:0.8rem;"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-      <h3 class="feature-title" style="font-family:var(--font-display);">Livraison Locale</h3>
-      <p class="feature-text" style="font-size:0.78rem;">Livraison offerte dans tout le Grand Libreville</p>
+  <!-- Duo Malin section -->
+  <div id="duo-section"></div>
+  <div class="duo-premium" id="duoBlock">
+    <div class="duo-header">
+      <span class="duo-badge"><i class="fas fa-sparkle"></i> Offre Exclusive</span>
+      <h2 class="duo-title title-font">L'Espace <strong style="color:var(--gold)">Duo Malin</strong></h2>
+      <p style="font-size:0.8rem; margin-top:5px;">1 escarpin + 1 sandale = Économie automatique</p>
     </div>
-    <div class="feature reveal" style="text-align:center;">
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.2" style="margin-bottom:0.8rem;"><path d="M21 12a9 9 0 11-6.219-8.56"/><polyline points="21 3 21 9 15 9"/></svg>
-      <h3 class="feature-title" style="font-family:var(--font-display);">Échanges Faciles</h3>
-      <p class="feature-text" style="font-size:0.78rem;">Satisfait ou échangé sous 7 jours</p>
-    </div>
-    <div class="feature reveal" style="text-align:center;">
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.2" style="margin-bottom:0.8rem;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-      <h3 class="feature-title" style="font-family:var(--font-display);">Qualité Premium</h3>
-      <p class="feature-text" style="font-size:0.78rem;">Matériaux choisis pour durer</p>
-    </div>
-    <div class="feature reveal" style="text-align:center;">
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.2" style="margin-bottom:0.8rem;"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-      <h3 class="feature-title" style="font-family:var(--font-display);">Conseil Dédié</h3>
-      <p class="feature-text" style="font-size:0.78rem;">Équipe à votre écoute au 077 00 00 00</p>
+    <div class="duo-slots" id="duoSlots"></div>
+    <div class="duo-summary">
+      <div class="price-compare"><span>Prix normal</span><span>27 500 F CFA</span></div>
+      <div class="price-compare"><span>Prix Duo</span><span class="duo-total">25 000 F CFA</span> <span class="eco-badge">Économisez 2 500 F</span></div>
+      <button class="btn-primary" id="confirmDuoBtn" style="width:100%; margin-top:12px;" disabled><i class="fas fa-cart-plus"></i> Ajouter le Duo au panier</button>
     </div>
   </div>
 
-  <footer style="background:var(--noir); padding:3rem 1.5rem; color:var(--parchment);">
-    <div class="footer-grid">
-      <div>
-        <a href="#" class="nav-logo" style="color:var(--cream);">OCÉAN<span>E</span></a>
-        <p style="font-size:0.8rem; margin:1rem 0;">Votre boutique de chaussures au Gabon. Retrouvez-nous au Centre-Ville de Libreville.</p>
-      </div>
-      <div><h4 style="color:var(--parchment);">Collections</h4><ul style="list-style:none;"><li><a href="#" style="color:rgba(255,255,255,0.5);">Escarpins</a></li><li><a href="#" style="color:rgba(255,255,255,0.5);">Sneakers</a></li></ul></div>
-      <div><h4 style="color:var(--parchment);">Infos</h4><ul style="list-style:none;"><li><a href="#" style="color:rgba(255,255,255,0.5);">Livraison</a></li><li><a href="#" style="color:rgba(255,255,255,0.5);">Contact</a></li></ul></div>
-      <div><h4 style="color:var(--parchment);">Océane</h4><p style="font-size:0.8rem;">Libreville, Gabon</p></div>
-    </div>
-    <div style="border-top:1px solid rgba(255,255,255,0.1); padding-top:1.5rem; text-align:center;">
-      <p style="font-size:0.7rem;">© 2025 Océane Libreville. Prix en FCFA.</p>
-    </div>
-  </footer>
-
-  <div class="cart-overlay" id="cart-overlay"></div>
-  <div class="cart-panel" id="cart-panel" style="position:fixed; top:0; right:0; bottom:0; background:white; z-index:200; overflow-y:auto; transform:translateX(100%); transition:0.4s; display:flex; flex-direction:column;">
-    <div style="display:flex; justify-content:space-between; padding:1.5rem;"><h2>Panier</h2><button id="cart-close" style="background:none; border:none; font-size:1.5rem;">✕</button></div>
-    <div id="cart-items" style="flex:1; padding:0 1.5rem;"></div>
-    <div id="cart-footer" style="padding:1.5rem; border-top:1px solid #eee; display:none;">
-      <div style="display:flex; justify-content:space-between; margin-bottom:1rem;"><span>Total</span><span id="cart-total">0 FCFA</span></div>
-      <button class="btn-primary" style="width:100%;">Commander</button>
-    </div>
+  <!-- Témoignages -->
+  <div class="testimonials">
+    <div class="testimonial-card">“Très confortable même après une journée complète au bureau. Design raffiné, je recommande !” — Laura M.</div>
+    <div class="testimonial-card">“Livraison rapide à Libreville et qualité supérieure à ce que j'attendais. Mes sandales préférées.” — Rebecca D.</div>
+    <div class="testimonial-card">“La paire parfaite pour les soirées, le cuir est doux et la semelle tient bien.” — Chloé A.</div>
   </div>
+</main>
 
-  <div class="toast" id="toast" style="position:fixed; bottom:2rem; left:50%; transform:translateX(-50%); background:var(--noir); color:white; padding:0.8rem 1.5rem; z-index:300; opacity:0; transition:0.4s;"></div>
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col"><h4>Collections</h4><ul><li>Nouveautés</li><li>Escarpins</li><li>Mules Talons</li><li>Sandales plates</li></ul></div>
+    <div class="footer-col"><h4>Infos</h4><ul><li>Livraison</li><li>Guide des tailles</li><li>FAQ</li><li>Échanges</li></ul></div>
+    <div class="footer-col"><h4>Suivez-nous</h4><ul><li><i class="fab fa-whatsapp"></i> WhatsApp</li><li><i class="fab fa-instagram"></i> Instagram</li><li><i class="fab fa-facebook"></i> Facebook</li></ul></div>
+    <div class="footer-col"><h4>Paiement</h4><ul><li>Airtel Money</li><li>Moov Money</li><li>Orange Money</li><li>Paiement à la livraison</li></ul></div>
+  </div>
+  <div class="payment-icons"><span>🔒 Paiement sécurisé</span></div>
+  <div style="font-size:0.7rem; text-align:center; color:var(--gray);">© 2025 OCÉANE — Libreville, Gabon</div>
+</footer>
 
-  <script>
-    (function() {
-      if (window.innerWidth < 1024) {
-        document.getElementById('cursor').style.display = 'none';
-        document.getElementById('cursor-ring').style.display = 'none';
-        document.body.style.cursor = 'auto';
-      }
+<!-- Cart drawer (un seul bouton WhatsApp) -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div style="padding:20px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between;"><span style="font-weight:500;">Mon panier</span><button id="closeDrawerBtn"><i class="fas fa-times"></i></button></div>
+  <div id="cartItemsList" style="flex:1; overflow:auto; padding:16px;"></div>
+  <div id="cartFooter" style="padding:16px; border-top:1px solid var(--border);">
+    <div style="display:flex; justify-content:space-between; margin-bottom:16px;"><span>Total</span><span id="cartTotal">0 F</span></div>
+    <button id="whatsappOrderBtn" class="whatsapp-checkout"><i class="fab fa-whatsapp"></i> Commander via WhatsApp</button>
+  </div>
+</div>
+<div class="toast" id="toastMsg"></div>
 
-      const products = [
-        { id:1, name:'Escarpins Lucia', brand:'Océane', price:89000, img:'https://images.unsplash.com/photo-1515347619252-60a4bf4fff4f?w=600&q=80', img2:'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=600&q=80', badge:'new', category:'escarpins', stars:5 },
-        { id:2, name:'Sneaker Aria', brand:'Océane', price:65000, oldPrice:79000, img:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80', img2:'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&q=80', badge:'sale', category:'sneakers', stars:5 },
-        { id:3, name:'Sandale Capri', brand:'Océane', price:58000, img:'https://images.unsplash.com/photo-1518049362265-d5b2a6467637?w=600&q=80', img2:'https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=600&q=80', badge:null, category:'sandales', stars:4 },
-        { id:4, name:'Botte Milano', brand:'Océane', price:130000, img:'https://images.unsplash.com/photo-1608256246200-53e635b5b65f?w=600&q=80', img2:'https://images.unsplash.com/photo-1571290274554-6a2eaa771e5f?w=600&q=80', badge:'new', category:'bottes', stars:5 },
-        { id:5, name:'Mule Florence', brand:'Océane', price:74000, img:'https://images.unsplash.com/photo-1562273138-f46be4ebdf4a?w=600&q=80', img2:'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=600&q=80', badge:null, category:'escarpins', stars:4 },
-        { id:6, name:'Ballerine Paola', brand:'Océane', price:52000, oldPrice:65000, img:'https://images.unsplash.com/photo-1484807352052-23338990c6c6?w=600&q=80', img2:'https://images.unsplash.com/photo-1515347619252-60a4bf4fff4f?w=600&q=80', badge:'sale', category:'nouveautes', stars:5 },
-        { id:7, name:'Talon Venezia', brand:'Océane', price:112000, img:'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&q=80', img2:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80', badge:'new', category:'nouveautes', stars:5 },
-        { id:8, name:'Derby Roma', brand:'Océane', price:69000, img:'https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=600&q=80', img2:'https://images.unsplash.com/photo-1518049362265-d5b2a6467637?w=600&q=80', badge:null, category:'sneakers', stars:4 },
-      ];
+<script>
+  // ----- PRODUITS PREMIUM -----
+  const allProducts = {
+    nouveautes: [
+      { id:"n1", name:"Escarpin Vénus", cat:"escarpins", price:16000, img:"https://images.unsplash.com/photo-1515347619252-60a4bf4fff4f?w=400&q=80", sizes:[36,37,38,39,40] },
+      { id:"n2", name:"Sandale Aria", cat:"sandales", price:11500, img:"https://images.unsplash.com/photo-1518049362265-d5b2a6467637?w=400&q=80", sizes:[35,37,38,39,41] },
+      { id:"n3", name:"Mule Odette", cat:"mules", price:13000, img:"https://images.unsplash.com/photo-1562273138-f46be4ebdf4a?w=400&q=80", sizes:[36,38,39,40] },
+      { id:"n4", name:"Escarpin Céleste", cat:"escarpins", price:16000, img:"https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=400&q=80", sizes:[35,36,37,38,39] }
+    ],
+    escarpins: [
+      { id:"e1", name:"Escarpin Vénus", cat:"escarpins", price:16000, img:"https://images.unsplash.com/photo-1515347619252-60a4bf4fff4f?w=400&q=80", sizes:[36,37,38,39,40] },
+      { id:"e2", name:"Escarpin Nuit Dorée", cat:"escarpins", price:16000, img:"https://images.unsplash.com/photo-1571290274554-6a2eaa771e5f?w=400&q=80", sizes:[35,36,37,38,40] },
+      { id:"e3", name:"Escarpin Altesse", cat:"escarpins", price:16000, img:"https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=400&q=80", sizes:[37,38,39,41] },
+      { id:"e4", name:"Escarpin Satin", cat:"escarpins", price:16000, img:"https://images.unsplash.com/photo-1484807352052-23338990c6c6?w=400&q=80", sizes:[36,38,40,41] }
+    ],
+    mules: [
+      { id:"m1", name:"Mule Dorée", cat:"mules", price:13000, img:"https://images.unsplash.com/photo-1562273138-f46be4ebdf4a?w=400&q=80", sizes:[36,38,39,40] },
+      { id:"m2", name:"Mule Velours", cat:"mules", price:13000, img:"https://images.unsplash.com/photo-1608256246200-53e635b5b65f?w=400&q=80", sizes:[35,37,38,40,41] },
+      { id:"m3", name:"Mule Élégance", cat:"mules", price:13000, img:"https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=400&q=80", sizes:[36,37,39,40] }
+    ],
+    sandales: [
+      { id:"s1", name:"Sandale Lumière", cat:"sandales", price:11500, img:"https://images.unsplash.com/photo-1518049362265-d5b2a6467637?w=400&q=80", sizes:[35,37,38,39,41] },
+      { id:"s2", name:"Sandale Évasion", cat:"sandales", price:11500, img:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80", sizes:[36,38,39,40,42] },
+      { id:"s3", name:"Mule Plate Nude", cat:"sandales", price:11500, img:"https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=400&q=80", sizes:[35,36,37,38] }
+    ]
+  };
 
-      let cart = [];
-      const grid = document.getElementById('products-grid');
-      const cartBadge = document.getElementById('cart-badge');
-      const cartTotal = document.getElementById('cart-total');
-      const cartItems = document.getElementById('cart-items');
-      const cartFooter = document.getElementById('cart-footer');
+  let cart = [];
+  let currentSize = "all";
+  let duoEscarpin = null, duoSandale = null;
+  const WHATSAPP_NUMBER = "241074705095"; // format international sans +
 
-      function formatCFA(amount) {
-        return amount.toLocaleString('fr-FR') + ' FCFA';
-      }
+  function getFlatProducts() { return [...allProducts.nouveautes, ...allProducts.escarpins, ...allProducts.mules, ...allProducts.sandales]; }
 
-      function renderProducts(filter) {
-        const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
-        grid.innerHTML = filtered.map(p => `
-          <div class="product-card reveal" data-id="${p.id}">
-            <div class="product-image-wrap">
-              <img src="${p.img}" alt="${p.name}" />
-              <img class="img-alt" src="${p.img2}" alt="${p.name}" />
-              ${p.badge ? '<span class="product-badge ' + p.badge + '">' + (p.badge === 'new' ? 'Nouveau' : 'Promo') + '</span>' : ''}
-              <div class="product-actions">
-                <button class="btn-add-cart">Ajouter</button>
-                <button class="btn-wishlist">♡</button>
-              </div>
-            </div>
-            <div class="product-brand">${p.brand}</div>
-            <div class="product-name">${p.name}</div>
-            <div class="product-price">
-              <span class="price-current">${formatCFA(p.price)}</span>
-              ${p.oldPrice ? '<span class="price-old">' + formatCFA(p.oldPrice) + '</span>' : ''}
-            </div>
-          </div>
-        `).join('');
-      }
+  function formatPrice(p) { return p.toLocaleString('fr-FR') + " F CFA"; }
 
-      renderProducts('all');
+  function renderProducts(sectionId, productArray) {
+    const container = document.getElementById(sectionId);
+    if(!container) return;
+    const filtered = currentSize === "all" ? productArray : productArray.filter(p => p.sizes.includes(parseInt(currentSize)));
+    if(filtered.length===0) { container.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:32px;">Aucun modèle en taille ${currentSize}</div>`; return; }
+    container.innerHTML = filtered.map(p => `
+      <div class="product-card" data-id="${p.id}">
+        <img class="product-img" src="${p.img}" alt="${p.name}" loading="lazy">
+        <div class="product-info">
+          <div class="product-name">${p.name}</div>
+          <div class="product-price">${formatPrice(p.price)}</div>
+          <div class="product-sizes">${p.sizes.map(sz => `<span class="size-dot">${sz}</span>`).join('')}</div>
+          <button class="btn-add" onclick="addToCart('${p.id}')"><i class="fas fa-bag-shopping"></i> Ajouter</button>
+          ${(p.cat === "escarpins" || p.cat === "sandales") ? `<button class="btn-duo-add" onclick="selectForDuo('${p.id}')"><i class="fas fa-gem"></i> Ajouter au Duo Malin</button>` : ''}
+        </div>
+      </div>
+    `).join('');
+  }
 
-      document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-          this.classList.add('active');
-          renderProducts(this.dataset.filter);
-        });
-      });
+  function renderAll() {
+    renderProducts("grid-nouveautes", allProducts.nouveautes);
+    renderProducts("grid-escarpins", allProducts.escarpins);
+    renderProducts("grid-mules", allProducts.mules);
+    renderProducts("grid-sandales", allProducts.sandales);
+    updateSizeStats();
+  }
 
-      document.getElementById('products-grid').addEventListener('click', function(e) {
-        const card = e.target.closest('.product-card');
-        if (!card) return;
-        if (e.target.classList.contains('btn-add-cart')) {
-          const id = parseInt(card.dataset.id);
-          const product = products.find(p => p.id === id);
-          const existing = cart.find(i => i.id === id);
-          if (existing) existing.qty++; else cart.push({...product, qty: 1});
-          updateCart();
-          showToast('Ajouté au panier');
-        } else if (e.target.classList.contains('btn-wishlist')) {
-          e.target.classList.toggle('active');
-          e.target.textContent = e.target.classList.contains('active') ? '♥' : '♡';
-        }
-      });
+  function updateSizeStats() {
+    const all = getFlatProducts();
+    let count = currentSize === "all" ? all.length : all.filter(p => p.sizes.includes(parseInt(currentSize))).length;
+    document.getElementById("sizeStats").innerHTML = currentSize === "all" ? `✨ Tous les modèles (${count})` : `📏 ${count} modèle(s) disponible(s) en taille ${currentSize}`;
+  }
 
-      function updateCart() {
-        const count = cart.reduce((s, i) => s + i.qty, 0);
-        const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
-        cartBadge.textContent = count;
-        cartBadge.classList.toggle('visible', count > 0);
-        cartTotal.textContent = formatCFA(total);
-        if (cart.length === 0) {
-          cartItems.innerHTML = '<p style="text-align:center; padding:2rem;">Panier vide</p>';
-          cartFooter.style.display = 'none';
-        } else {
-          cartFooter.style.display = 'block';
-          cartItems.innerHTML = cart.map(i => `
-            <div style="display:flex; gap:1rem; padding:0.8rem 0; border-bottom:1px solid #eee;">
-              <img src="${i.img}" style="width:60px; height:60px; object-fit:cover;" />
-              <div style="flex:1;"><strong>${i.name}</strong><br>Qté: ${i.qty} · ${formatCFA(i.price * i.qty)}</div>
-              <button class="remove-item" data-id="${i.id}" style="background:none; border:none; color:red;">🗑</button>
-            </div>
-          `).join('');
-        }
-      }
+  window.setSizeFilter = function(size) {
+    currentSize = size;
+    document.querySelectorAll(".size-chip").forEach(btn => btn.classList.toggle("active", btn.dataset.size == size));
+    renderAll();
+  };
 
-      document.getElementById('cart-items').addEventListener('click', function(e) {
-        if (e.target.classList.contains('remove-item')) {
-          const id = parseInt(e.target.dataset.id);
-          cart = cart.filter(i => i.id !== id);
-          updateCart();
-        }
-      });
+  function initSizeFilters() {
+    const sizes = [35,36,37,38,39,40,41,42];
+    const container = document.getElementById("globalSizeContainer");
+    container.innerHTML = `<button class="size-chip active" data-size="all" onclick="setSizeFilter('all')">Toutes</button>` + sizes.map(s => `<button class="size-chip" data-size="${s}" onclick="setSizeFilter('${s}')">${s}</button>`).join('');
+  }
 
-      document.getElementById('cart-toggle').addEventListener('click', () => {
-        document.getElementById('cart-panel').style.transform = 'translateX(0)';
-        document.getElementById('cart-overlay').style.display = 'block';
-      });
-      document.getElementById('cart-close').addEventListener('click', () => {
-        document.getElementById('cart-panel').style.transform = 'translateX(100%)';
-        document.getElementById('cart-overlay').style.display = 'none';
-      });
-      document.getElementById('cart-overlay').addEventListener('click', () => {
-        document.getElementById('cart-panel').style.transform = 'translateX(100%)';
-        document.getElementById('cart-overlay').style.display = 'none';
-      });
+  // Panier
+  window.addToCart = function(id) {
+    const prod = getFlatProducts().find(p => p.id === id);
+    if(!prod) return;
+    const existing = cart.find(i => i.id === id);
+    if(existing) existing.qty++;
+    else cart.push({...prod, qty:1});
+    updateCartUI();
+    showToast(`${prod.name} ajouté`);
+  };
 
-      function showToast(msg) {
-        const t = document.getElementById('toast');
-        t.textContent = msg;
-        t.style.opacity = '1';
-        t.style.transform = 'translateX(-50%) translateY(0)';
-        setTimeout(() => { t.style.opacity = '0'; t.style.transform = 'translateX(-50%) translateY(20px)'; }, 2500);
-      }
+  window.removeFromCart = function(id) {
+    cart = cart.filter(i => i.id !== id);
+    updateCartUI();
+  };
 
-      const revealObserver = new IntersectionObserver(entries => {
-        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-      }, { threshold: 0.1 });
-      document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-    })();
-  </script>
+  function updateCartUI() {
+    const count = cart.reduce((a,b)=>a+b.qty,0);
+    const total = cart.reduce((a,b)=>a+b.price*b.qty,0);
+    const countSpan = document.getElementById("cart-count");
+    countSpan.style.display = count ? "inline-block" : "none";
+    countSpan.innerText = count;
+    const container = document.getElementById("cartItemsList");
+    if(cart.length===0) container.innerHTML = "<div style='text-align:center; padding:32px;'>Votre panier est élégamment vide.</div>";
+    else container.innerHTML = cart.map(i => `<div style="display:flex; gap:12px; margin-bottom:16px;"><img src="${i.img}" style="width:60px;height:60px;object-fit:cover;border-radius:8px;"><div><strong>${i.name}</strong><br>${formatPrice(i.price)} x ${i.qty}<br><button onclick="removeFromCart('${i.id}')" style="color:var(--gold); font-size:0.7rem;">Supprimer</button></div><div style="margin-left:auto;">${formatPrice(i.price*i.qty)}</div></div>`).join('');
+    document.getElementById("cartTotal").innerHTML = formatPrice(total);
+  }
+
+  window.selectForDuo = function(id) {
+    const prod = getFlatProducts().find(p=>p.id===id);
+    if(!prod) return;
+    if(prod.cat === "escarpins") duoEscarpin = prod;
+    else if(prod.cat === "sandales") duoSandale = prod;
+    else { showToast("Seulement escarpins ou sandales pour le duo"); return; }
+    renderDuoSlots();
+    showToast(`${prod.name} ajouté au duo`);
+  };
+
+  function renderDuoSlots() {
+    const slotDiv = document.getElementById("duoSlots");
+    if(!slotDiv) return;
+    slotDiv.innerHTML = `
+      <div class="duo-slot ${duoEscarpin ? 'filled' : ''}" id="slotEscarpin">
+        ${duoEscarpin ? `<img class="slot-img" src="${duoEscarpin.img}"><div class="slot-name">${duoEscarpin.name}</div><div class="slot-price">${formatPrice(duoEscarpin.price)}</div><button class="remove-slot" onclick="clearDuo('escarpin')"><i class="fas fa-times"></i></button>` : `<i class="fas fa-heel" style="font-size:1.5rem; color:var(--gold);"></i><div style="margin-top:5px;">Escarpin</div><small>à choisir</small>`}
+      </div>
+      <div class="duo-slot ${duoSandale ? 'filled' : ''}" id="slotSandale">
+        ${duoSandale ? `<img class="slot-img" src="${duoSandale.img}"><div class="slot-name">${duoSandale.name}</div><div class="slot-price">${formatPrice(duoSandale.price)}</div><button class="remove-slot" onclick="clearDuo('sandale')"><i class="fas fa-times"></i></button>` : `<i class="fas fa-shoe-prints" style="font-size:1.5rem; color:var(--gold);"></i><div>Sandale</div><small>à choisir</small>`}
+      </div>
+    `;
+    const btn = document.getElementById("confirmDuoBtn");
+    if(btn) {
+      btn.disabled = !(duoEscarpin && duoSandale);
+      if(duoEscarpin && duoSandale) btn.innerHTML = `<i class="fas fa-gem"></i> Ajouter le duo (25 000 F CFA)`;
+      else btn.innerHTML = `<i class="fas fa-lock"></i> Sélectionnez les deux modèles`;
+    }
+  }
+
+  window.clearDuo = function(type) {
+    if(type==="escarpin") duoEscarpin = null;
+    else duoSandale = null;
+    renderDuoSlots();
+  };
+
+  document.getElementById("confirmDuoBtn")?.addEventListener("click", ()=>{
+    if(!duoEscarpin || !duoSandale) return;
+    const duoId = `duo_${Date.now()}`;
+    cart.push({ id: duoId, name: `Duo Malin : ${duoEscarpin.name} + ${duoSandale.name}`, price: 25000, qty: 1, img: duoEscarpin.img });
+    updateCartUI();
+    duoEscarpin = null; duoSandale = null;
+    renderDuoSlots();
+    showToast("Duo Malin ajouté ! Économie réalisée.");
+  });
+
+  function showToast(msg) {
+    const toast = document.getElementById("toastMsg");
+    toast.innerText = msg;
+    toast.style.opacity = "1";
+    setTimeout(()=> toast.style.opacity = "0", 2000);
+  }
+
+  // WhatsApp Order unique (numéro +241 074 70 50 95)
+  function sendWhatsAppOrder() {
+    if(cart.length === 0) {
+      showToast("Votre panier est vide");
+      return;
+    }
+    const lines = cart.map(i => `• ${i.name} x${i.qty} → ${formatPrice(i.price*i.qty)}`).join("\n");
+    const total = cart.reduce((a,b)=>a+b.price*b.qty,0);
+    const message = `Bonjour OCÉANE ! 👠\n\nJe souhaite commander :\n${lines}\n\nTOTAL : ${formatPrice(total)}\n\nMerci pour votre élégance ✨`;
+    const encoded = encodeURIComponent(message);
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`, "_blank");
+  }
+
+  // cart drawer
+  document.getElementById("cartIconBtn").onclick = () => { document.getElementById("cartDrawer").classList.add("open"); document.getElementById("cartOverlay").classList.add("open"); };
+  document.getElementById("closeDrawerBtn").onclick = () => { document.getElementById("cartDrawer").classList.remove("open"); document.getElementById("cartOverlay").classList.remove("open"); };
+  document.getElementById("cartOverlay").onclick = () => { document.getElementById("cartDrawer").classList.remove("open"); document.getElementById("cartOverlay").classList.remove("open"); };
+  document.getElementById("whatsappOrderBtn").onclick = sendWhatsAppOrder;
+  document.getElementById("whatsappMenuLink")?.addEventListener("click", (e) => {
+    e.preventDefault();
+    sendWhatsAppOrder();
+  });
+
+  // menus mobile
+  document.getElementById("menuBtn").onclick = () => document.getElementById("mobileMenu").classList.add("open");
+  document.getElementById("closeMenuBtn").onclick = () => document.getElementById("mobileMenu").classList.remove("open");
+  document.querySelectorAll(".menu-list a").forEach(a=>a.addEventListener("click",()=> document.getElementById("mobileMenu").classList.remove("open")));
+
+  // init html containers for grids
+  function buildDOM() {
+    const sections = [{id:"nouveautes",title:"Nouveautés",desc:"Derniers arrivages"},{id:"escarpins",title:"Escarpins",desc:"Business & Gala · 16 000 F"},{id:"mules",title:"Mules à Talons",desc:"Élégance quotidienne · 13 000 F"},{id:"sandales",title:"Sandales & Mules Plates",desc:"Le coin détente · 11 500 F"}];
+    let html = "";
+    sections.forEach(s => {
+      html += `<div class="section"><div class="section-label">${s.desc.split('·')[0]}</div><h2 class="section-title title-font">${s.title}</h2><p class="section-desc">${s.desc}</p></div><div class="product-grid" id="grid-${s.id}"></div>`;
+    });
+    document.getElementById("nouveautes").innerHTML = html;
+  }
+  buildDOM();
+  initSizeFilters();
+  renderAll();
+  renderDuoSlots();
+  updateCartUI();
+</script>
 </body>
 </html>
